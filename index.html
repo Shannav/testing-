@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prediction & Record Manager</title>
+
+<style>
+:root{
+  --bg:#020617;--card:#020617;--border:#1e293b;
+  --accent:#38bdf8;--ok:#22c55e;--danger:#ef4444;
+  --text:#e5e7eb;--muted:#94a3b8;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;padding:30px;
+  background:linear-gradient(135deg,#020617,#020617);
+  font-family:Segoe UI,system-ui,sans-serif;
+  color:var(--text);
+}
+.container{max-width:1200px;margin:auto}
+h1{margin-bottom:5px}
+.sub{color:var(--muted);margin-bottom:25px}
+
+.card{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:25px;
+}
+
+input,select{
+  background:#020617;color:var(--text);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:8px 10px;
+}
+
+button{
+  padding:8px 14px;border-radius:8px;
+  border:none;cursor:pointer;font-weight:600
+}
+.btn-ok{background:var(--ok)}
+.btn-del{background:var(--danger)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  gap:10px;
+}
+
+table{
+  width:100%;border-collapse:collapse;margin-top:15px
+}
+th,td{
+  border:1px solid var(--border);
+  padding:8px;text-align:center
+}
+th{background:#020617;color:var(--muted)}
+
+.prediction{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:15px;
+}
+.box{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;text-align:center
+}
+.value{font-size:22px;color:var(--accent);font-weight:600}
+.note{font-size:12px;color:var(--muted);margin-top:10px}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>Prediction & Record Manager</h1>
+<div class="sub">CRUD records + date-based prediction (browser-only)</div>
+
+<!-- FORM -->
+<div class="card">
+<div class="grid">
+<input type="date" id="date">
+<select id="letter">
+  <option value="">Letter</option>
+</select>
+<input type="number" min="0" max="99" placeholder="Super" id="s">
+<input type="number" min="0" max="99" placeholder="First" id="a">
+<input type="number" min="0" max="99" placeholder="Second" id="b">
+<input type="number" min="0" max="99" placeholder="Third" id="c">
+<input type="number" min="0" max="99" placeholder="Fourth" id="e">
+<button class="btn-ok" onclick="save()">Save</button>
+</div>
+</div>
+
+<!-- TABLE -->
+<div class="card">
+<table>
+<thead>
+<tr>
+<th>Date</th><th>L</th><th>S</th><th>1</th><th>2</th><th>3</th><th>4</th><th>Action</th>
+</tr>
+</thead>
+<tbody id="rows"></tbody>
+</table>
+</div>
+
+<!-- PREDICTION -->
+<div class="card">
+<label>Select date to predict</label>
+<input type="date" id="predictDate" onchange="predict()">
+
+<div class="prediction" style="margin-top:15px">
+<div class="box"><div class="value" id="pl"></div><div class="note">Letter</div></div>
+<div class="box"><div class="value" id="ps"></div><div class="note">Super</div></div>
+<div class="box"><div class="value" id="pa"></div><div class="note">First</div></div>
+<div class="box"><div class="value" id="pb"></div><div class="note">Second</div></div>
+<div class="box"><div class="value" id="pc"></div><div class="note">Third</div></div>
+<div class="box"><div class="value" id="pe"></div><div class="note">Fourth</div></div>
+</div>
+</div>
+
+<div class="note">Educational statistical model · No guaranteed accuracy</div>
+</div>
+
+<script>
+let data=[];
+
+// letters A–Z
+for(let i=65;i<=90;i++){
+  letter.innerHTML+=`<option>${String.fromCharCode(i)}</option>`;
+}
+
+function save(){
+  const d=date.value;
+  if(!d)return alert("Date required");
+  data=data.filter(r=>r.d!==d);
+  data.push({
+    d, l:letter.value,
+    s:+s.value,a:+a.value,b:+b.value,c:+c.value,e:+e.value
+  });
+  render();
+}
+
+function del(d){
+  data=data.filter(r=>r.d!==d);
+  render();
+}
+
+function render(){
+  rows.innerHTML=data.sort((a,b)=>b.d.localeCompare(a.d)).map(r=>`
+  <tr>
+    <td>${r.d}</td><td>${r.l}</td>
+    <td>${r.s}</td><td>${r.a}</td>
+    <td>${r.b}</td><td>${r.c}</td><td>${r.e}</td>
+    <td><button class="btn-del" onclick="del('${r.d}')">Del</button></td>
+  </tr>`).join("");
+}
+
+function avg(k){
+  let w=1,sum=0,t=0;
+  [...data].reverse().forEach(r=>{sum+=r[k]*w;t+=w;w++});
+  return t?Math.round(sum/t):0;
+}
+
+function predLetter(){
+  let m={};let w=1;
+  [...data].reverse().forEach(r=>{m[r.l]=(m[r.l]||0)+w;w++});
+  return Object.entries(m).sort((a,b)=>b[1]-a[1])[0]?.[0]||"A";
+}
+
+function predict(){
+  if(!data.length)return;
+  pl.textContent=predLetter();
+  ps.textContent=avg("s");
+  pa.textContent=avg("a");
+  pb.textContent=avg("b");
+  pc.textContent=avg("c");
+  pe.textContent=avg("e");
+}
+</script>
+</body>
+</html>
