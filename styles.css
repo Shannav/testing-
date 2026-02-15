@@ -1,0 +1,67 @@
+.app {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 15px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.button {
+  background-color: #28a745;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .header {
+    font-size: 1.5em;
+  }
+  .card {
+    margin: 10px;
+    padding: 15px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+  .header {
+    font-size: 2em;
+  }
+  .card {
+    margin: 20px;
+    padding: 25px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .header {
+    font-size: 2.5em;
+  }
+  .card {
+    margin: 30px;
+    padding: 30px;
+  }
+}
