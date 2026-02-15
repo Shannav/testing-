@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background: #4CAF50; color: white; padding: 10px 20px; text-align: center; }
+        nav { 
+            display: flex; 
+            justify-content: space-around; 
+            background: #333; 
+            padding: 10px 0; 
+        }
+        nav a { color: white; text-decoration: none; padding: 10px; }
+        section { display: flex; flex-wrap: wrap; padding: 20px; }
+        .card { border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 10px; padding: 15px; flex: 1 1 calc(30% - 40px); }
+        footer { text-align: center; padding: 10px; background: #f1f1f1; position: relative; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Audit Outlet Cleaning Dashboard</h1>
+    </header>
+    <nav>
+        <a href="#checklists">Cleaning Checklists</a>
+        <a href="#outlet-management">Outlet Management</a>
+        <a href="#audit-reports">Audit Reports</a>
+        <a href="#task-tracking">Task Tracking</a>
+    </nav>
+    <section>
+        <div class="card" id="checklists">
+            <h2>Cleaning Checklists</h2>
+            <p>Manage and view cleaning checklists for various outlets.</p>
+        </div>
+        <div class="card" id="outlet-management">
+            <h2>Outlet Management</h2>
+            <p>Overview of all outlets with option to add, update, or remove.</p>
+        </div>
+        <div class="card" id="audit-reports">
+            <h2>Audit Reports</h2>
+            <p>Review and generate audit reports based on cleaning activities.</p>
+        </div>
+        <div class="card" id="task-tracking">
+            <h2>Task Tracking</h2>
+            <p>Track tasks assigned to teams and individual members.</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2026 Audit Outlet Cleaning App</p>
+    </footer>
+</body>
+</html>
