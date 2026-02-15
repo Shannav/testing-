@@ -3,129 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audit Outlet Cleaning - Professional Management System</title>
+    <title>Audit Outlet Cleaning App</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        label {
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                margin: 0 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <h1>🏢 AuditClean</h1>
+    <div class="container">
+        <h1>Welcome to Audit Outlet</h1>
+        <form>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
             </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#login" class="btn-login">Login</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
             </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h2>Professional Outlet Cleaning Audits</h2>
-            <p>Streamline your cleaning operations with our comprehensive audit management system</p>
-            <button class="btn btn-primary" onclick="scrollToLogin()">Get Started</button>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2>Why Choose AuditClean?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📋</div>
-                    <h3>Smart Checklists</h3>
-                    <p>Comprehensive cleaning checklists tailored for outlet audits</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Real-time Reports</h3>
-                    <p>Generate detailed audit reports instantly</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Mobile Responsive</h3>
-                    <p>Works seamlessly on all devices and screen sizes</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3>Team Management</h3>
-                    <p>Manage multiple teams and track their performance</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <h2>About AuditClean</h2>
-            <p>AuditClean is a professional-grade audit outlet cleaning management system designed to help businesses maintain the highest standards of cleanliness and compliance. Our user-friendly interface makes it easy to track, report, and manage cleaning operations.</p>
-        </div>
-    </section>
-
-    <!-- Login Section -->
-    <section class="login-section" id="login">
-        <div class="login-container">
-            <div class="login-box">
-                <h2>Welcome Back</h2>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="username">Email or Username</label>
-                        <input type="text" id="username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary full-width">Login</button>
-                </form>
-                <p class="signup-link">Don't have an account? <a href="#signup">Sign up here</a></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Signup Section -->
-    <section class="signup-section" id="signup" style="display:none;">
-        <div class="signup-container">
-            <div class="signup-box">
-                <h2>Create Account</h2>
-                <form id="signupForm">
-                    <div class="form-group">
-                        <label for="fullname">Full Name</label>
-                        <input type="text" id="fullname" name="fullname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password2">Password</label>
-                        <input type="password" id="password2" name="password2" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary full-width">Sign Up</button>
-                </form>
-                <p class="login-link">Already have an account? <a href="#login">Login here</a></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 AuditClean. All rights reserved. Professional Outlet Cleaning Management System</p>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html>
