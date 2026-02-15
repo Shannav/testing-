@@ -1,35 +1,41 @@
-// app.js
+const express = require('express');
+const bodyParser = require('body-parser');
 
-// User Authentication
-function authenticateUser(username, password) {
-    // Placeholder for user authentication logic
-    console.log(`Authenticating user: ${username}`);
+const app = express();
+app.use(bodyParser.json());
+
+let users = {
+  admin: { password: 'admin123', role: 'admin' },
+  user1: { password: 'user123', role: 'user' },
+  manager: { password: 'manager123', role: 'manager' },
+};
+
+// Middleware for authentication
+function authenticate(req, res, next) {
+  const { username, password } = req.body;
+  const user = users[username];
+
+  if (user && user.password === password) {
+    req.user = { username, role: user.role };
+    next();
+  } else {
+    res.status(401).send('Unauthorized');
+  }
 }
 
-// Cleaning Task Management
-function addCleaningTask(task) {
-    // Placeholder for adding a new cleaning task
-    console.log(`Adding cleaning task: ${task}`);
-}
+// Login route
+app.post('/login', authenticate, (req, res) => {
+  res.status(200).send(`Welcome ${req.user.username}, you are logged in as ${req.user.role}`);
+});
 
-function removeCleaningTask(taskId) {
-    // Placeholder for removing a cleaning task
-    console.log(`Removing cleaning task with ID: ${taskId}`);
-}
+// Register route (for demo purposes, we won't save new users)
+app.post('/register', (req, res) => {
+  const { username, password, role } = req.body;
+  users[username] = { password, role };
+  res.status(201).send(`User ${username} created.`);
+});
 
-// Audit Logging
-function logAudit(action, details) {
-    // Placeholder for audit logging
-    console.log(`Audit Log - Action: ${action}, Details: ${details}`);
-}
-
-// Local Storage for Audit
-function saveAuditLogToLocalStorage(log) {
-    localStorage.setItem('auditLog', JSON.stringify(log));
-}
-
-// Example usage
-const cleaningTask = 'Clean the kitchen';
-addCleaningTask(cleaningTask);
-authenticateUser('user123', 'password');
-logAudit('Add Task', cleaningTask);
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
