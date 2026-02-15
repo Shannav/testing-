@@ -3,81 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audit Outlet Cleaning App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Login &amp; Registration</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 400px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .input-group {
-            margin: 15px 0;
-        }
-        label {
-            margin-bottom: 5px;
-            display: block;
-        }
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        @media (max-width: 600px) {
-            .container {
-                width: 100%;
-                margin: 0 10px;
-            }
-        }
+        body { font-family: Arial, sans-serif; }
+        .tab { display: inline-block; padding: 10px; cursor: pointer; }
+        .tab-content { display: none; padding: 20px; }
+        .active { display: block; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Audit Outlet</h1>
-        <form>
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" required>
-            </div>
+    <h1>Login &amp; Registration System</h1>
+    <div>
+        <span class="tab" onclick="showTab('login')">Login</span>
+        <span class="tab" onclick="showTab('registration')">Register</span>
+    </div>
+    
+    <div id="login" class="tab-content">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="loginUsername">Username:</label>
+            <input type="text" id="loginUsername" name="username" required>
+            <br>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="password" required>
+            <br>
             <button type="submit">Login</button>
         </form>
+        <p>Demo Credentials: <br> Username: demo <br> Password: demo123</p>
     </div>
+    
+    <div id="registration" class="tab-content">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <label for="registerUsername">Username:</label>
+            <input type="text" id="registerUsername" name="username" required>
+            <br>
+            <label for="registerPassword">Password:</label>
+            <input type="password" id="registerPassword" name="password" required>
+            <br>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
+        // Default to show login tab
+        showTab('login');
+    </script>
 </body>
 </html>
